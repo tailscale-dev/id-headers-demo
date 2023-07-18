@@ -22,6 +22,8 @@ $ tailscale serve https / 127.0.0.1:5000
 $ tailscale funnel 443 on
 ```
 
+The Flask server is fine for development, but not advised for production deployment. Our instance of this demo is behind [`gunicorn`](https://gunicorn.org/), but otherwise exactly as described here.
+
 The listener program will look for two environment variables when it runs, but will operate fine without them. If you want to set those variables:
 
 - `DEMO_INVITE_LINK` is an invite link URL you can generate from your Tailscale admin console
