@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="Tailscale identity headers demo">
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Automatically pull user ID data from Tailscale connections.">{% if tailscale_url %}
+    <meta property="og:image" content="{{ tailscale_url + '/static/social.png' }}">
+    <meta property="og:url" content="{{ tailscale_url }}">{% endif %}
+    <meta name="twitter:card" content="summary_large_image">
+
+    <title>Tailscale identity headers demo</title>
+    
+    <style>
+      body {
+        background-color: {{ background_color }};
+        color: {{ color }};
+        max-width: 800px;
+        margin: 0 auto;
+        font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, 
+          monospace; 
+        font-size: 18px;
+        line-height: 1.5em;
+        padding: 10px;
+      }
+      p.emoji {
+        text-align: center;
+        font-size: 4em;
+        line-height: .5em;
+      }
+      ul#headers-list {
+        list-style-type: square;
+    }
+    </style>
+  </head>
+
+  <body>
+    <p class="emoji">{{ emoji }}</p>
+    <p>{{ greeting }}</p>
+
+    {% if identified %}
+    <p>Because you've connected to this machine through Tailscale, your user name and login are included with your requests. This is only the case for traffic flowing over your tailnet. You should see this machine in your <a href="https://login.tailscale.com/admin/machines">Tailscale admin console</a>; if you remove it you'll no longer send identity headers with your requests to it.</p>
+
+    {% elif not identified %}
+    <p>This is a demo of Tailscale's identity headers. You can add this machine as a <a href="https://tailscale.com/kb/1084/sharing/">"shared node"</a> to your tailnet and see how it can serve different content based on those headers. It will only be visible to you—not other users on your tailnet—and will not be able to initiate connections to any of your devices.</p>
+    {% if invite_link %}<p>To add this node to your tailnet, click <a href="{{invite_link}}">this invite link</a> and log in to Tailscale.</p>{% endif %}
+    {% endif %}
+
+    <details><summary>See all incoming headers</summary>
+      <ul id="headers-list">{% for key in headers %}
+        <li>{{ key }}: {{ headers[key] }}</li>{% endfor %}
+      </ul>
+    </details>
+  </body>
+</html>
