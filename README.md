@@ -24,5 +24,5 @@ $ tailscale funnel 443 on
 
 The listener program will look for two environment variables when it runs, but will operate fine without them. If you want to set those variables:
 
-`DEMO_INVITE_LINK` is an invite link URL you can generate from your Tailscale admin console
-`TAILSCALE_URL` is the URL on which the demo is available. We only use it to populate the URL in the social cards of our live demo.
+- `DEMO_INVITE_LINK` is an invite link URL you can generate from your Tailscale admin console
+- `TAILSCALE_URL` is the URL on which the demo is available. We only use it to populate the URL in the social cards of our live demo.
