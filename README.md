@@ -1,6 +1,6 @@
 # Tailscale identity headers demo
 
-This repository is a companion to the Tailscale blog post “Tapping into Tailscale’s identity headers with serve.” For more background, read that post, and then come back here to look under the hood. You can see the live demo at [https://id-headers-demo.pango-lin.ts.net](https://id-headers-demo.pango-lin.ts.net).
+This repository is a companion to the Tailscale blog post “[Tapping into Tailscale’s identity headers with Serve](https://tailscale.dev/blog/id-headers-tailscale-serve-flask).” For more background, read that post, and then come back here to look under the hood. You can see the live demo at [https://id-headers-demo.pango-lin.ts.net](https://id-headers-demo.pango-lin.ts.net).
 
 For the purpose of this demo, we’re keeping things simple and the entire Flask app is one function in a file.
 
