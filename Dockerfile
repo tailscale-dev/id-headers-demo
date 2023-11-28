@@ -1,4 +1,3 @@
-#FROM python:3.12
 FROM lsiobase/alpine:3.17
 
 WORKDIR /app
