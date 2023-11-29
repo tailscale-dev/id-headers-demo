@@ -60,3 +60,5 @@ services:
       - TAILSCALE_FUNNEL=on
     restart: unless-stopped
 ```
+
+To build for x86 VMs on an Apple Silicon Mac use `docker buildx build --platform linux/amd64 -t ghcr.io/tailscale-dev/demo-id-headers:tagexample .`.
