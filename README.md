@@ -30,3 +30,33 @@ The listener program will look for two environment variables when it runs, but w
 
 - `DEMO_INVITE_LINK` is an invite link URL you can generate from your Tailscale admin console
 - `TAILSCALE_URL` is the URL on which the demo is available. We only use it to populate the URL in the social cards of our live demo.
+
+## docker
+
+Recently we added docker support to this image. It can now be deployed using a Linuxserver.io image and their "docker mod" concept which lets you install software at run time - in our case we install Tailscale into the container so that we can run one instance of this demo per event we attend from a single VPS VM.
+
+More details available in the devrel [infra repo](https://github.com/tailscale-dev/devrel-demo-infra). But an example compose snippet might look like this once you've built the app with `docker build -t <image>:<tag> .`:
+
+```
+---
+version: "2"
+services:
+  id-demo-cleveland:
+    image: ghcr.io/tailscale-dev/demo-id-headers:cleveland
+    container_name: id-demo-cleveland
+    volumes:
+      - /mnt/zfs/appdata/2023/cleveland:/var/lib/tailscale
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+      - DOCKER_MODS=ghcr.io/tailscale-dev/docker-mod:main
+      - TAILSCALE_STATE_DIR=/var/lib/tailscale
+      - TAILSCALE_SERVE_MODE=https
+      - TAILSCALE_SERVE_PORT=5000
+      - TAILSCALE_USE_SSH=0
+      - TAILSCALE_AUTHKEY=tskey-auth-1234
+      - TAILSCALE_HOSTNAME=hello-cleveland
+      - TAILSCALE_FUNNEL=on
+    restart: unless-stopped
+```
