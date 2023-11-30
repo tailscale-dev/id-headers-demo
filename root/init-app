@@ -1,0 +1,6 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+exec gunicorn listener:app \
+  --bind 0.0.0.0:5000 \
+  -e DEMO_INVITE_LINK=$DEMO_INVITE_LINK

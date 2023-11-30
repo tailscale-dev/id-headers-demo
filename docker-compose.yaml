@@ -1,0 +1,20 @@
+---
+version: "2"
+services:
+  test:
+    image: test
+    container_name: test
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+      - DOCKER_MODS=ghcr.io/tailscale-dev/docker-mod:main
+      - TAILSCALE_STATE_DIR=/var/lib/tailscale
+      - TAILSCALE_SERVE_MODE=https
+      - TAILSCALE_SERVE_PORT=5000
+      - TAILSCALE_USE_SSH=0
+      - TAILSCALE_AUTHKEY=tskey-auth-1234
+      - TAILSCALE_HOSTNAME=test1234
+      - TAILSCALE_FUNNEL=on
+      - DEMO_INVITE_LINK=https://login.tailscale.com/1234
+    restart: unless-stopped
